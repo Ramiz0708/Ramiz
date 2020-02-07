@@ -1,0 +1,60 @@
+<HTML>
+	<HEAD>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+	   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+	   crossorigin=""/>
+		<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+	   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+	   crossorigin=""></script>
+		<Script src="jquery.js"></script>
+		<Script src="underscore.js"></script>
+		<Script src="backbone.js"></script>
+		<Script src="main.js"></script>
+		<script type="text/javascript" src="../dist/Leaflet.Coordinates-0.1.5.min.js"></script>
+		<link rel="stylesheet" href="Control.Coordinates.css">
+		<link rel="stylesheet" type="text/css" href="chrome-extension://glgemekgfjppocilabhlcbngobillcgf/styles.css">
+		<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/gokertanrisever/leaflet-ruler/master/src/leaflet-ruler.css">
+		<script src="https://cdn.rawgit.com/gokertanrisever/leaflet-ruler/master/src/leaflet-ruler.js"></script>
+	  
+		
+		<style>
+				body {padding: 0; margin: 0;}
+				html, body,{height: 100%;width:100%; position: absolute;}
+		</style>
+	</HEAD>
+	<BODY>
+		<div id="mapid" style="height:100%; width:100%;"></div>
+		<script src="Control.Coordinates.js"></script>
+		<Script type="text/javascript">
+			var map = L.map('mapid').setView([47.241, 39.711], 17);
+			L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+				}).addTo(map);
+			var LeafIcon = L.Icon.extend({options: {iconSize:[50, 50], iconAnchor:[25, 50], popupAnchor: [-3, -76]}});
+			var 
+				Atlet = new LeafIcon({iconUrl: 'Atlet.png'}),
+				Krest = new LeafIcon({iconUrl: 'Krest.png'}),
+				Kacheli = new LeafIcon({iconUrl: 'Kacheli.png'});
+			L.marker([47.2409, 39.7095], {icon: Atlet}).bindPopup("Легкоатлетический манеж ДГТУ.").addTo(map);
+			L.marker([47.23925, 39.7111], {icon: Krest}).addTo(map).bindPopup("Храм св.мч. Татианы при ДГТУ.");
+			L.marker([47.2401, 39.7113], {icon: Kacheli}).addTo(map).bindPopup("Качели.");
+			var c = new L.Control.Coordinates();
+				c.addTo(map);
+				map.on('click', function(e) {c.setCoordinates(e);});
+				
+			var options = {
+				position: 'topleft',
+				lengthUnit: {
+				factor: 0.539956803,
+				display: 'Nautical Miles',
+				decimal: 2
+				}};
+			L.control.ruler(options).addTo(map);
+		</Script>
+	</BODY>
+</HTML>
+
+
+
+
+
